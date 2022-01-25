@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import HTMLReactParser from "html-react-parser";
 import {useParams} from "react-router-dom";
 import millify from "millify";
@@ -35,7 +35,6 @@ const CryptoDetails = () => {
         { title: 'Total Supply', value: `$ ${millify(coinDetails.supply.total)}`, icon: <ExclamationCircleOutlined /> },
         { title: 'Circulating Supply', value: `$ ${millify(coinDetails.supply.circulating)}`, icon: <ExclamationCircleOutlined /> },
     ];
-
     return(
         <Col className="coin-detail-container">
             <Col className="coin-heading-container">
