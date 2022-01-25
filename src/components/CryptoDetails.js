@@ -29,9 +29,9 @@ const CryptoDetails = () => {
     const genericStats = [
         { title: 'Number Of Markets', value: coinDetails.numberOfMarkets, icon: <FundOutlined /> },
         { title: 'Number Of Exchanges', value: coinDetails.numberOfExchanges, icon: <MoneyCollectOutlined /> },
-        { title: 'Aprroved Supply', value: coinDetails.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-        { title: 'Total Supply', value: `$ ${coinDetails.totalSupply && millify(coinDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-        { title: 'Circulating Supply', value: `$ ${coinDetails.circulatingSupply && millify(coinDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Aprroved Supply', value: coinDetails.supply.confirmed ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
+        { title: 'Total Supply', value: `$ ${millify(coinDetails.supply.total)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Circulating Supply', value: `$ ${millify(coinDetails.supply.circulating)}`, icon: <ExclamationCircleOutlined /> },
     ];
 
     return(
