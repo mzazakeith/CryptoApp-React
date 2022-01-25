@@ -4,6 +4,7 @@ import {Typography, Row, Col, Statistic} from "antd";
 import {Link} from "react-router-dom";
 
 import { useGetCoinsQuery} from "../services/cryptoApi";
+import {Cryptocurrencies, News} from "./index";
 
 const {Title} = Typography;
 
@@ -23,6 +24,16 @@ const Homepage = () => {
                 <Col span={12}><Statistic title="Total 24h Volume" value={millify(globalStats.total24hVolume)}/></Col>
                 <Col span={12}><Statistic title="Total Markets" value={millify(globalStats.totalMarkets)}/></Col>
             </Row>
+            <div className="home-heading-container">
+                <Title level={2} className="home-title">Top 10 Cryptocurrencies</Title>
+                <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show more</Link></Title>
+            </div>
+            <Cryptocurrencies simplified/>
+            <div className="home-heading-container">
+                <Title level={2} className="home-title">Latest Cryptocurrency news</Title>
+                <Title level={3} className="show-more"><Link to="/news">Show more</Link></Title>
+            </div>
+            <News simplified/>
         </>
     )
 
