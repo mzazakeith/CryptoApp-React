@@ -5,16 +5,18 @@ import {Card, Input, Col, Row} from 'antd';
 
 import {useGetCoinsQuery} from "../services/cryptoApi";
 
-const Cryptocurrencies = ({simplified}) => {
+const Cryptocurrencies = ({ simplified }) => {
     const count = simplified ? 10 : 100;
     const {data:cryptosList, isFetching} = useGetCoinsQuery(count);
     const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
-    console.log(cryptos);
+
+    if(isFetching) return "loading";
+    
 
     return(
         <>
             <Row gutter={[32,32]} className="crypto-card-container">
-                {cryptos.map((currency)=>(
+                {cryptos?.map((currency)=>(
                     <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.uuid}>
                         <Link to={`/crypto/${currency.uuid}`}>
                             <Card
