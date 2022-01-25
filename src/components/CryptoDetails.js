@@ -3,7 +3,7 @@ import HTMLReactParser from "html-react-parser";
 import {useParams} from "react-router-dom";
 import millify from "millify";
 import {Col, Row, Typography, Select} from "antd";
-import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined} from '@ant-design/icons';
 
 import {useGetCoinDetailsQuery} from "../services/cryptoApi";
 
@@ -15,6 +15,7 @@ const CryptoDetails = () => {
     const [timePeriod, setTimePeriod] = useState('7d');
     const {data, isFetching} = useGetCoinDetailsQuery(coinId);
     const coinDetails = data?.data?.coin;
+
     if (isFetching) return "Loading";
 
     const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
@@ -22,7 +23,6 @@ const CryptoDetails = () => {
     const stats = [
         { title: 'Price to USD', value: `$ ${coinDetails.price && millify(coinDetails.price)}`, icon: <DollarCircleOutlined /> },
         { title: 'Rank', value: coinDetails.rank, icon: <NumberOutlined /> },
-        { title: '24h Volume', value: `$ ${coinDetails.volume && millify(coinDetails.volume)}`, icon: <ThunderboltOutlined /> },
         { title: 'Market Cap', value: `$ ${coinDetails.marketCap && millify(coinDetails.marketCap)}`, icon: <DollarCircleOutlined /> },
         { title: 'All-time-high(daily avg.)', value: `$ ${millify(coinDetails.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
     ];
@@ -55,6 +55,15 @@ const CryptoDetails = () => {
                         </Title>
                         <p>An overview showing the statistics of {coinDetails.name}</p>
                     </Col>
+                    {stats.map(({icon, title, value}) => (
+                        <Col className="coin-stats">
+                             <Col className="coin-stats-name">
+                                 <Text>{icon}</Text>
+                                 <Text>{title}</Text>
+                             </Col>
+                            <Text className="stats">{value}</Text>
+                        </Col>
+                    ))}
                 </Col>
 
             </Col>
